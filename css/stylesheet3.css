@@ -1,0 +1,101 @@
+body{
+  background-color:#808080 ;
+  font-family: 'メイリオ','Meiryo','MS ゴシック','Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',sans-serif;
+  color: #fff;
+}
+
+.main_all{
+  position: relative;
+}
+
+.main_img{
+  text-align: center;
+  margin: 50px 10px auto;
+}
+
+img{
+
+  width: 612px;
+  height: auto;
+}
+
+a{
+  text-decoration: none;
+}
+
+.titlebar{
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  padding: 10px 30px;
+  margin: 0;
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform:(translate(-50%, -50%))
+}
+
+.search_btn{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform:(translate(-50%, -50%))
+}
+
+.scroll{
+  overflow: scroll;
+  margin: 10px auto 20px;
+  padding: 25px;
+  width: 500px;
+  height: 180px;
+  border: 2px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  top: 60%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform:(translate(-50%, -50%));
+  position: absolute;
+}
+
+.result{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform:(translate(-50%, -50%));
+
+  text-align: center;
+  width: 500px;
+  height: 20px;
+  border: 2px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+#description {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform:(translate(-50%, -50%));
+  width: 450px;
+}
+
+
+
+.main_btn{
+  padding: 10px 10px;
+  background: honeydew;
+  width: 200px;
+  margin: 10px auto;
+  text-align: center;
+
+}

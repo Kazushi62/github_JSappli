@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/stylesheet3.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+  <script src="../Js/jquery-2.1.3.min.js"></script>
+  <title>Education</title>
+</head>
+
+<body>
+  <div class="main_all">
+  
+    <div class="titlebar">
+      <h1>Select the Part you want to work out </h1>
+    </div>
+    <form id="nyuuryoku" action="">
+
+      <div class="search_btn">
+        Parts:
+        <select id="menu" name="menu">
+          <option value="1" id="Chest">Chest</option>
+          <option value="2" id="Back">Back</option>
+          <option value="3" id="Leg">Leg</option>
+          <option value="4" id="Arm">Arm</option>
+          <option value="5" id="Abdominal">Abdominal</option>
+        </select>
+        <input type="button" id="send" value="See Recommendation" style="height: 20px;" >
+      </div>
+      
+      <div class="main_img">
+        <img src="../imgs/ケーブルクロスオーバー.jpeg"  alt="ケーブルクロスオーバー">
+      </div>
+      <div id="judgment" class="result" placeholder=""></div>
+      <div id="description" class="scroll"></div>
+    </form>
+    
+
+    
+
+  </div>
+  <p class="main_btn"><a href="../html/index1.html">back to Record page</a></p>
+
+<script type="text/javascript">
+$("#send").on("click", function(){
+  const handan = $('select').val();
+  //console.log(handan);
+ 
+  let result=""
+  let description=""
+    if ( handan == 1 ) {
+      //console.log('うまくいってます');
+  
+      result = "Bench Press or Incline Dumbel Press"
+      description = "The bench press, or chest press, is an upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench. The exercise uses the pectoralis major, the anterior deltoids, and the triceps, among other stabilizing muscles.The bench press, or chest press, is an upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench. The exercise uses the pectoralis major, the anterior deltoids, and the triceps, among other stabilizing muscles."  
+      $("#judgment").text(result)
+      $("#description").text(description)
+    } else if (handan == 2) {
+        //console.log('あああああ');
+        result = "aaaa"
+        $("#judgment").text(result)        
+    } else if (handan == 3) {
+        result = "bbbb"
+        $("#judgment").text(result)       
+    } else if (handan == 4) {
+        result = "cccc"  
+        $("#judgment").text(result)  
+    } else if (handan == 5) {
+        result = "ddd"
+        $("#judgment").text(result)
+      }});
+    //3. 表示処理
+
+</script>
+</body>
+</html>

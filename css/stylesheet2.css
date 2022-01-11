@@ -1,0 +1,31 @@
+body{
+  background-color:#808080 ;
+  font-family: 'メイリオ','Meiryo','MS ゴシック','Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',sans-serif;
+}
+
+#myLineChart{
+  display: block;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  background: #fff;
+  margin: 50px auto;
+}
+
+
+.main_btn{
+  padding: 10px 10px;
+  background: honeydew;
+  width: 200px;
+  margin: 10px auto;
+  text-align: center;
+
+}
+
+.bottom_btn{
+  display: flex;
+  width: 600px;
+  font-size: 12px;
+  margin: 0 auto;
+  
+}

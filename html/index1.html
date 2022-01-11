@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/stylesheet1.css" rel="stylesheet">
+
+  <title>Record your record</title>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<div class="main_all">
+  
+  <div class="titlebar">
+    <h1>Record your workout record</h1>
+  </div>
+  <div class="main_img">
+    <img src="../imgs/懸垂の画像.jpg"  alt="懸垂の画像">
+  </div>
+  
+  <!--div>div*3/実際の入力画面-->
+  <div class="nyuryokugamen">
+    
+    <div class="scroll">
+      <div id="output"></div>
+    </div>
+    <div class="main_input">
+      <div>
+        Event: <input type="text" list="training-menu" id="type" style="width: 180px;height: 20px;">
+        <datalist id="training-menu">
+          <option value="Bench Press" label="Pectoral Training" name="Bench"></option>
+          <option value="Incline Dambel Press " label="Pectoral Training" name="Incline"></option>
+          <option value="Cable Cross Over" label="Pectoral" name="Cable"></option>
+          <option value="Squat" label="Leg Training" name="Squat"></option>
+          <option value="Leg Press" label="Leg Training" name="Leg"></option>
+          <option value="Dead Lift" label="Back Training" name="Dead"></option>
+          <option value="Chinning" label="Back Training" name="Chinning"></option>
+          <option value="Arm Curl" label="Arm Training" name="Arm"></option>
+          <option value="Skull Crusher" label="Arm Training" name="Skull"></option>
+        </datalist>
+      </div>
+      　Weight：<input type="number" name="" id="number1" style="width: 60px;" cols="30" rows="10">KG　 
+      <div>
+        <input type="number" style="width:50px;" id="number2" style="width:50px;height:20px;">times　
+      </div>
+    </div>
+    Date：<input type="date" name="" id="date" style="height: 20px;">
+    <button id="send">Register</button>
+  </div>
+    <div class="remover">
+      <button id="remove">All Deleted</button>
+    </div>
+</div>
+<div class="bottom_btn">
+<p class="main_btn"><a href="../index.html">back to login page</a></p>
+<p class="main_btn"><a href="../html/index2.html">see your Training Histry</a></p>
+<p class="main_btn"><a href="../">Score your body</a></p>
+
+</div>
+
+<div class="last_tab">
+  <p class="last_btn"><a href="../html/index3.html">for people doetn't know how to work out </a></p>
+</div>
+
+  <!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- JQuery -->
+
+
+  <!--** 以下Firebase **-->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    import { getDatabase, ref, push, set, onValue, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.1/firebase-database.min.js";
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "",
+      authDomain: "gs-academy-appli.firebaseapp.com",
+      databaseURL: "https://gs-academy-appli-default-rtdb.firebaseio.com",
+      projectId: "gs-academy-appli",
+      storageBucket: "gs-academy-appli.appspot.com",
+      messagingSenderId: "268873398544",
+      appId: "1:268873398544:web:825495e4ce9a1ee2278d95",
+      measurementId: "G-KK3MB3ELY6"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    const DB = getDatabase(app); //RealtimeDBに接続
+    let DBRef = ref(DB, "Training-Record"); //RealtimeDB内の"To_Reocrd_Training"を使う
+
+    $("#send").on("click", function(){
+      const type = $("#type").val();
+      const text = $("#number1").val();
+      const number = $("#number2").val();
+      const date = $("#date").val();
+      
+      //let DBRef = ref(DB, "Training-Record/"+type);
+      
+      const msg = {
+        event : type,
+        weight : text,
+        number : number,
+        date: date,
+        }
+      console.log(msg)
+      const newPostRef = push(DBRef);
+      set(newPostRef, msg);
+      
+    });
+
+    $("#number2").keydown(function(event){
+      if(event.keyCode == 13){
+        $("#send").click();
+      }
+    })
+
+
+    $("#remove").on('click', function(){
+      $("#output").empty();
+    })
+
+    //onChildAdded 何かデータを追記するときに利用
+    onChildAdded(DBRef, function (data){
+      const msg = data.val();
+      console.log(msg);
+      
+      const key = data.key;
+      const youbi = ["日","月","火","水","木","金","土"];
+      const date1 = new Date();
+      const time = date1.getFullYear() + "年" + 
+				(date1.getMonth() + 1)  + "月" + 
+				date1.getDate() + "日 " + youbi[date1.getDay()] + "曜日" ;// 0は日曜日～6は土曜日 ;
+      console.log(time);
+      let h = "<div class='message1'>";
+      h += msg.date;
+      h += "<div class='event_msg'>"
+      h += msg.event;
+      h += "</div>"
+      h += "";
+      h += msg.weight;
+      h += "kg "
+      h += msg.number;
+      h += " times"
+      h += "<button class='remove' id='";
+      h += key;
+      h += "'>Delete</button>'"
+      h += "</div>";
+      $("#output").append(h);
+      
+    })
+
+    //各Messageの削除イベント
+    $(document).on("click",".remove",function(){
+    remove(ref(DB, "Training-Record/" +$(this).attr("id")));
+    $(this).parent().remove();
+    });
+
+</script>
+</body>
+</html>
